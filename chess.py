@@ -1,3 +1,4 @@
+import unittest
 from board import Board 
 class Chess: 
     def __init__ (self):
@@ -18,3 +19,6 @@ class Chess:
             self.__turn__= "BLACK"
         else: 
             self.__turn__= "WHITE"
+
+
+

@@ -1,4 +1,4 @@
-from pieces import Rook 
+from rook import Rook 
 class Board: 
     def __init__ (self): 
         self.__positions__ = []
