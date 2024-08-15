@@ -2,7 +2,7 @@ from chess import Chess
 def main ():
     chess = Chess()
     while True:
-        ...
+        play(chess)
 def play(chess):
     try:
         from_row= int(input("From row: "))
@@ -18,6 +18,11 @@ def play(chess):
         )
     
     except Exception as e:
-        print ("error")
+        print ("error", e)
 
+
+
+if __name__ == '__main__':
+
+    main()
     
