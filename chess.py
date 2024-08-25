@@ -18,4 +18,11 @@ class Chess:
 
     def turn(self):
         return self.__turn__
+    
+    def is_playing(self):
 
+        return True
+
+    def show_board(self):
+
+        return str(self.__board__)
