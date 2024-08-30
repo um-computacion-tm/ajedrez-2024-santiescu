@@ -4,6 +4,7 @@ class Chess:
     def __init__(self):
         self.__board__ = Board()
         self.__turn__ = "WHITE"
+    
     def is_playing(self):
         return True
     
@@ -19,10 +20,10 @@ class Chess:
         if piece.valid_positions(from_row, from_col, to_row, to_col):
             raise InvalidMove()
         self.change_turn()
-    @property
 
     def turn(self):
         return self.__turn__
+    
     def show_board(self):
         return str(self.__board__)
 
