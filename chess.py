@@ -1,4 +1,5 @@
 from board import Board
+from exceptions import InvalidMove
 class Chess:
     def __init__(self):
         self.__board__ = Board()
