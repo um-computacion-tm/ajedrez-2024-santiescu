@@ -32,6 +32,11 @@ class Board:
         self.__positions__ [0][7] = Rook ("BLACK",self)
         self.__positions__ [7][7] = Rook ("WHITE",self)
         self.__positions__ [7][0] = Rook ("WHITE",self)
+        
+    def move(self, from_row, from_col, to_row, to_col):
+        origin = self.get_piece(from_row, from_col)
+        self.set_piece(to_row, to_col, origin)
+        self.set_piece(from_row, from_col, None)
     
     def pawn_positions(self):
         self.__positions__ [1][0] = Pawn ("BLACK",self)
