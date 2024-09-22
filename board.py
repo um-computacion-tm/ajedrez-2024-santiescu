@@ -2,35 +2,24 @@ from rook import Rook
 from pawn import Pawn
 
 class Board: 
-    def __init__(self, for_test=False): 
-        if for_test:
-            # Inicializa un tablero vacío para pruebas
-            self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
-        else:
-            # Inicializa el tablero con piezas en sus posiciones iniciales
-            self.__positions__ = []
-            for _ in range(8):
-                col = []
-                for _ in range(8):
-                    col.append(None)
-                self.__positions__.append(col)
-            self.setup_pieces()
-
-    def setup_pieces(self):
-        # Configura las piezas en el tablero
-        self.rook_positions()
-        self.pawn_positions()
+    def __init__ (self): 
+        self.__positions__ = []
+        for _ in range (8):
+            col = []
+            for _ in range (8):
+                col.append(None)
+            self.__positions__.append(col)
 
     def __str__(self):
         board_str = ""
         for row in self.__positions__:
             for cell in row:
                 if cell is not None:
-                    board_str += str(cell)
+                    board_str += str(cell) + " "  # Asegúrate de agregar un espacio
                 else:
-                    board_str += " "
+                    board_str += ". "  # Cambié a punto para representar celdas vacías
             board_str += "\n"
-        return board_str
+        return board_str.strip()  # Eliminar el último salto de línea
 
     def get_piece(self, row, col):
         return self.__positions__[row][col]
@@ -43,7 +32,7 @@ class Board:
         self.__positions__[0][7] = Rook("BLACK", self)
         self.__positions__[7][7] = Rook("WHITE", self)
         self.__positions__[7][0] = Rook("WHITE", self)
-        
+
     def move(self, from_row, from_col, to_row, to_col):
         origin = self.get_piece(from_row, from_col)
         self.set_piece(to_row, to_col, origin)
