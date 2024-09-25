@@ -1,30 +1,43 @@
 from rook import Rook 
 from pawn import Pawn
+from exceptions import OutOfBoard, RowOutOfBoard, ColumnOutOfBoard
 
 class Board: 
-    def __init__ (self): 
+    def __init__(self, for_test=False): 
         self.__positions__ = []
-        for _ in range (8):
+        for _ in range(8):
             col = []
-            for _ in range (8):
+            for _ in range(8):
                 col.append(None)
             self.__positions__.append(col)
+
+        if not for_test:
+            self.rook_positions()
+            self.pawn_positions()
 
     def __str__(self):
         board_str = ""
         for row in self.__positions__:
             for cell in row:
                 if cell is not None:
-                    board_str += str(cell) + " "  # Asegúrate de agregar un espacio
+                    board_str += str(cell) + " "
                 else:
                     board_str += ". "  # Cambié a punto para representar celdas vacías
             board_str += "\n"
-        return board_str.strip()  # Eliminar el último salto de línea
+        return board_str.strip()
+
+    def validate_position(self, row, col):
+        if row < 0 or row >= 8:
+            raise RowOutOfBoard()
+        if col < 0 or col >= 8:
+            raise ColumnOutOfBoard()
 
     def get_piece(self, row, col):
+        self.validate_position(row, col)
         return self.__positions__[row][col]
     
     def set_piece(self, row, col, piece):
+        self.validate_position(row, col)
         self.__positions__[row][col] = piece
     
     def rook_positions(self): 
@@ -34,6 +47,8 @@ class Board:
         self.__positions__[7][0] = Rook("WHITE", self)
 
     def move(self, from_row, from_col, to_row, to_col):
+        self.validate_position(from_row, from_col)
+        self.validate_position(to_row, to_col)
         origin = self.get_piece(from_row, from_col)
         self.set_piece(to_row, to_col, origin)
         self.set_piece(from_row, from_col, None)
