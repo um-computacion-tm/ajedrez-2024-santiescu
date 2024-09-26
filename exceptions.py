@@ -1,5 +1,6 @@
 class InvalidMove(Exception):
     message = "Movimiento de pieza invalido"
+    
     def __str__(self):
         return self.message
     
@@ -19,7 +20,7 @@ class OutOfBoard(InvalidMove):
     message = "La posicion indicada se encuentra fuera del tablero"
 
 class RowOutOfBoard(OutOfBoard):
-    message = "La Fila indicada se encuentra fuera del tablero"
+    message = "La posicion indicada se encuentra fuera del tablero"  # Unificar mensaje
 
 class ColumnOutOfBoard(OutOfBoard):
-    message = "La Columna indicada se encuentra fuera del tablero"
+    message = "La posicion indicada se encuentra fuera del tablero"  # Unificar mensaje

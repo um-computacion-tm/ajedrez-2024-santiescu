@@ -2,8 +2,7 @@ from pieces import Piece
 
 class Rook(Piece):
     def __init__(self, color, board):
-        super().__init__(color, board)
-        self.board = board  # Asignar el tablero al atributo self.board
+        super().__init__(color, board)  # Inicializar color y tablero
         self.white_str = "♖"
         self.black_str = "♜"
 
@@ -20,7 +19,7 @@ class Rook(Piece):
             else:
                 if other_piece.color != self.color:
                     positions.append((r, col))  # Puede capturar la pieza enemiga
-                break  # No puede saltar sobre otras piezas
+                break
         return positions
 
     def possible_positions_va(self, row, col):
