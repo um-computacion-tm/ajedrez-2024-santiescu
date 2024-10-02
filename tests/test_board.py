@@ -3,7 +3,7 @@ from board import Board
 from pieces import Pawn
 from rook import Rook
 from exceptions import OutOfBoard, RowOutOfBoard, ColumnOutOfBoard
-
+from bishop import Bishop
 class TestBoard(unittest.TestCase):
 
     # STR
@@ -143,6 +143,18 @@ class TestBoard(unittest.TestCase):
                 "        \n"
             )
         )
+
+
+def test_bishops_creation(self):
+        board=Board()
+        self.assertIsInstance(board.get_piece(0,2),Bishop)
+        self.assertEqual(board.get_piece(0,2).__color__,'BLACK')
+        self.assertIsInstance(board.get_piece(0,5),Bishop)
+        self.assertEqual(board.get_piece(0,5).__color__,'BLACK')
+        self.assertIsInstance(board.get_piece(7,2),Bishop)
+        self.assertEqual(board.get_piece(7,2).__color__,'WHITE')
+        self.assertIsInstance(board.get_piece(7,5),Bishop)
+        self.assertEqual(board.get_piece(7,5).__color__,'WHITE')
 
 if __name__ == '__main__':
     unittest.main()
