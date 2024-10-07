@@ -66,3 +66,8 @@ class Rook(Piece):
         if start_row == end_row or start_col == end_col:
             return True  # Movimiento válido en línea recta
         return False  # Las torres no pueden moverse en diagonal
+    
+    def is_row_col_in_valid_postions(self,to_row,to_col,possible_positions):
+        if (to_row,to_col) in possible_positions:
+            return True
+        else: False
