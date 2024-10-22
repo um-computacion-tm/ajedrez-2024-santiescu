@@ -43,3 +43,6 @@ class Pawn(Piece):
                     return [(from_row-1,from_col),(from_row-2,from_col)]
                 else: return [(from_row-1,from_col)]
             else: return []
+
+    def treid(self):
+        return True

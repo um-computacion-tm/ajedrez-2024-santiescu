@@ -15,4 +15,7 @@ class TestPawn(unittest.TestCase):
             [(2, 5), (3, 5)]
         )
 
-   
+    def test_tried (self): 
+        board = Board(for_test = True)
+        pawn = Pawn("BLACK", board)
+        self.assertTrue(pawn.treid())
