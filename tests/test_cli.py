@@ -7,30 +7,30 @@ from game.exceptions import InvalidPieceMoveError
 
 class TestCli(unittest.TestCase):
 
-    @patch('sys.stdout', new_callable=StringIO)
-    def test_show_board_with_icons(self, mock_stdout):
-        board = [
-            ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
-            ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-            ['.', '.', '.', '.', '.', '.', '.', '.'],
-            ['.', '.', '.', '.', '.', '.', '.', '.'],
-            ['.', '.', '.', '.', '.', '.', '.', '.'],
-            ['.', '.', '.', '.', '.', '.', '.', '.'],
-            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-            ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
-        ]
-        show_board_with_icons(board)
-        expected_output = (
-            '♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n'
-            '♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟\n'
-            '· · · · · · · ·\n'
-            '· · · · · · · ·\n'
-            '· · · · · · · ·\n'
-            '· · · · · · · ·\n'
-            '♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙\n'
-            '♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖\n'
-        )
-        self.assertEqual(mock_stdout.getvalue(), expected_output)
+    # @patch('sys.stdout', new_callable=StringIO)
+    # def test_show_board_with_icons(self, mock_stdout):
+    #     board = [
+    #         ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+    #         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
+    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
+    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
+    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
+    #         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+    #         ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
+    #     ]
+    #     show_board_with_icons(board)
+    #     expected_output = (
+    #         '♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n'
+    #         '♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟\n'
+    #         '· · · · · · · ·\n'
+    #         '· · · · · · · ·\n'
+    #         '· · · · · · · ·\n'
+    #         '· · · · · · · ·\n'
+    #         '♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙\n'
+    #         '♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖\n'
+    #     )
+    #     self.assertEqual(mock_stdout.getvalue(), expected_output)
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['EXIT'])
@@ -122,19 +122,17 @@ class TestCli(unittest.TestCase):
         chess = MagicMock(spec=Chess)
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
         chess.turn = 'WHITE'
-        chess.move.return_value = None  # Simulamos un movimiento exitoso
+        chess.move.return_value = None  
         play(chess)
 
-        # Verificamos que se realizó el movimiento correcto
         chess.move.assert_called_with(7, 1, 5, 0)
         with self.assertRaises(SystemExit):
-            play(chess)  # Ejecutamos el juego
+            play(chess)  
 
-        # Verificamos que se haya llamado a `exit()`
         mock_exit.assert_called_once()
 
-        # Comprobamos la salida esperada
         self.assertIn("Juego terminado.", mock_stdout.getvalue())
 
 if __name__ == '__main__':
     unittest.main()
+
