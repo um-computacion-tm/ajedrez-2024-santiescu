@@ -1,4 +1,4 @@
-from .chess import Chess
+from game.chess import Chess
 from game.exceptions import InvalidMove, GameOverException, NonPieceOriginError, WrongTurnError, InvalidPieceMoveError
 
 def main ():
