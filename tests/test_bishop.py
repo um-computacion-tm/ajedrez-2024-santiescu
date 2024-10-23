@@ -6,8 +6,8 @@ class VerificarAlfil(unittest.TestCase):
     def test_representacion_str(self):
         alfil_blanco = Bishop('WHITE')
         alfil_negro = Bishop('BLACK')
-        self.assertEqual(str(alfil_blanco), 'B')
-        self.assertEqual(str(alfil_negro), 'b')
+        self.assertEqual(str(alfil_blanco), '♗')
+        self.assertEqual(str(alfil_negro), '♝')
 
     def test_movimientos_disponibles_blanco(self):
         alfil = Bishop('WHITE')

@@ -1,4 +1,4 @@
-from game.chess import Chess
+from .chess import Chess
 from game.exceptions import InvalidMove, GameOverException, NonPieceOriginError, WrongTurnError, InvalidPieceMoveError
 
 def main ():
@@ -25,7 +25,7 @@ def play(chess):
         render_board_with_icons(chess.get_board())
         print("Indica las coordenadas de la pieza que quieres mover y su destino.")
         print("Escribe EXIT para finalizar la partida.")
-        print("Turno actual:", chess.turno)
+        print("Turno actual:", chess.turn)
 
         origen_fila = obtener_input("Fila de origen: ")
         origen_columna = obtener_input("Columna de origen: ")

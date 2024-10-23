@@ -26,7 +26,7 @@ class InvalidPieceMoveError(InvalidMove):
     message = "Movimiento no válido para la pieza seleccionada."
 
 class NonPieceOriginError(InvalidMove):
-    message = "No hay ninguna pieza en la posición de origen.."
+    message = "No hay ninguna pieza en la posición de origen."
 
 
 class OutOfBoard(InvalidMove):
