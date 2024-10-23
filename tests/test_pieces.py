@@ -10,7 +10,7 @@ class VerificacionPieza(unittest.TestCase):
     def test_color_pieza_negra(self):
         color_negro = 'BLACK'
         pieza_negra = Piece(color_negro)
-        self.assertEqual(pieza_negra._color_, color_negro)
+        self.assertEqual(pieza_negra.__color__, color_negro)
 
     def test_obtener_color_pieza_blanca(self):
         pieza = Piece("WHITE")

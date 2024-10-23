@@ -62,7 +62,7 @@ class TestCli(unittest.TestCase):
     def test_valid_move_pawn(self, mock_render_board, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
+        chess.turn = 'WHITE'
         play(chess)
         chess.move.assert_called_with(6, 0, 4, 0)
 
@@ -72,46 +72,46 @@ class TestCli(unittest.TestCase):
     def test_valid_move_knight1(self, mock_render_board, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
+        chess.turn = 'WHITE'
         play(chess)
-        chess.realizar_movimiento.assert_called_with(7, 1, 5, 0)
+        chess.move.assert_called_with(7, 1, 5, 0)
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['7', '1', '5', '0'])
     def test_valid_move_knight_black(self, mock_stdout, mock_input):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'BLACK'
+        chess.turn = 'BLACK'
         play(chess)
-        chess.realizar_movimiento.assert_called_with(7, 1, 5, 0)
+        chess.move.assert_called_with(7, 1, 5, 0)
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['0', '0', '8', '1', '0', '0', 'EXIT'])
     def test_invalid_coordinates(self, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
+        chess.turn = 'WHITE'
         play(chess)
         self.assertIn("Entrada inválida. Por favor ingresa un número entre 0 y 7.", mock_stdout.getvalue())
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['0', '0', '1', '1', 'EXIT'])
     def test_symbol_coordinates(self, mock_input, mock_stdout):
-        chess = Mock(spec=['get_board', 'turno', 'realizar_movimiento'])
+        chess = Mock(spec=['get_board', 'turn', 'move'])
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
-        chess.realizar_movimiento.side_effect = InvalidPieceMoveError("Invalid move for the selected piece.")
+        chess.turn = 'WHITE'
+        chess.move.side_effect = InvalidPieceMoveError("Movimiento no válido para la pieza seleccionada.")
 
         play(chess)
         self.assertIn("Turno actual: WHITE", mock_stdout.getvalue())
-        self.assertIn("Movimiento inválido: Invalid move for the selected piece.", mock_stdout.getvalue())
+        self.assertIn("Movimiento no válido para la pieza seleccionada.", mock_stdout.getvalue())
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['a', 'b', 'c', 'd', '0', '0', '0', '0', 'EXIT'])
     def test_non_numeric_input(self, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
+        chess.turn = 'WHITE'
         play(chess)
         self.assertIn("Entrada inválida. Por favor ingresa un número entre 0 y 7.", mock_stdout.getvalue())
     
@@ -121,12 +121,12 @@ class TestCli(unittest.TestCase):
     def test_valid_move_then_exit(self, mock_stdout, mock_input, mock_exit):
         chess = MagicMock(spec=Chess)
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
-        chess.turno = 'WHITE'
-        chess.realizar_movimiento.return_value = None  # Simulamos un movimiento exitoso
+        chess.turn = 'WHITE'
+        chess.move.return_value = None  # Simulamos un movimiento exitoso
         play(chess)
 
         # Verificamos que se realizó el movimiento correcto
-        chess.realizar_movimiento.assert_called_with(7, 1, 5, 0)
+        chess.move.assert_called_with(7, 1, 5, 0)
         with self.assertRaises(SystemExit):
             play(chess)  # Ejecutamos el juego
 
