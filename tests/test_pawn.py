@@ -1,6 +1,6 @@
 import unittest
-from pawn import Pawn
-from board import Board
+from game.pawn import Pawn
+from game.board import Board
 
 
 class TestPawn(unittest.TestCase):
@@ -18,4 +18,4 @@ class TestPawn(unittest.TestCase):
     def test_tried (self): 
         board = Board(for_test = True)
         pawn = Pawn("BLACK", board)
-        self.assertTrue(pawn.treid())
+        self.assertTrue(pawn.tried())

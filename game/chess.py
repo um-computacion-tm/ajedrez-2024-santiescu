@@ -1,5 +1,5 @@
-from board import Board
-from exceptions import InvalidMove, InvalidTurn, EmptyPosition
+from game.board import Board
+from game.exceptions import InvalidMove, InvalidTurn, EmptyPosition
 
 class Chess:
     def __init__(self):
@@ -8,6 +8,9 @@ class Chess:
     
     def is_playing(self):
         return True
+    
+    def get_board (self):
+        return self.__board__.get_board_state()
     
     def move(
         self,
