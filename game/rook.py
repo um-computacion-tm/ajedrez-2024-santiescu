@@ -3,12 +3,19 @@ from game.pieces import Piece
 class Rook(Piece):
 
     def __str__(self):
-        return '♜' if self._color_ == 'WHITE' else '♖'
+        return '♖' if self.__color__ == 'WHITE' else '♜'
     
     def possible_moves(self, from_row, from_col):
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         return super().possible_moves_gen(from_row, from_col, directions)
 
+   
+   
+   
+   
+   
+   
+   
     # def __str__(self):
     #     return self.white_str if self.color == "WHITE" else self.black_str
 

@@ -5,41 +5,30 @@ from game.king import King
 from game.knight import Knight
 from game.queen import Queen
 from game.exceptions import OutOfBoard, RowOutOfBoard, ColumnOutOfBoard
-
+from game.exceptions import GameOverException, NonCaptureOwnPieceError, NonPassOverPieceError, NonCaptureForwardError, NonPieceOriginError
+from game.pieces import Piece
 class Board: 
-    def __init__(self, for_test=False): 
-         
-        self._positions_ = [[None] * 8 for _ in range(8)]
+    def __init__(self):  
+        self.__positions__ = [[None] * 8 for _ in range(8)]
         self.starting_positions()
-
-    def __str__(self):
-        board_str = ""
-        for row in self.__positions__:
-            for cell in row:
-                if cell is not None:
-                    board_str += str(cell) + " "
-                else:
-                    board_str += ". " 
-            board_str += "\n"
-        return board_str.strip()
     
     def get_piece(self,row,col):
-        if not 0 <= row < 8 and not 0 <= col < 8:
-            raise OutOfBoard()
-        elif not 0 <= row < 8:
-            raise RowOutOfBoard()
-        elif not 0 <= col < 8:
-            raise ColumnOutOfBoard()
-        else: return self.__positions__[row][col]
+        return self.__positions__[row][col]
     
-    def set_piece(self, row, col, piece):
-        if not (0 <= row < 8 or 0 <= col < 8):
-            raise OutOfBoard()
-        elif not 0 <= row < 8:
-            raise RowOutOfBoard()
-        elif not 0 <= col < 8:
-            raise ColumnOutOfBoard()
-        else: self.__positions__[row][col] = piece
+    def get_piece_color(self, row, col):
+        piece = self.get_piece(row, col)
+        if piece is None:
+            raise NonPieceOriginError(f"There is no piece at the origin position.")
+        return piece.get_color()
+    
+    def is_valid_move(self, from_row, from_col, to_row, to_col):
+        piece = self.get_piece(from_row, from_col)
+        if not piece:
+            return False
+
+        posibles_movimientos = piece.possible_moves(from_row, from_col)
+        return (to_row, to_col) in posibles_movimientos
+
     
     def move(self, from_row, from_col, to_row, to_col):
         self.validate_position(from_row, from_col)
@@ -81,3 +70,63 @@ class Board:
             row_repr = [str(piece) if piece else '.' for piece in row]
             board_repr.append(row_repr)
         return board_repr
+    
+    def move_piece(self, from_row, from_col, to_row, to_col):
+        # Mueve una pieza en el tablero si las reglas del juego lo permiten.
+        piece = self.get_piece(from_row, from_col)
+        target_piece = self.get_piece(to_row, to_col)
+
+        if not piece:
+            raise ValueError("No hay ninguna pieza en la posición de origen")
+
+        if target_piece and piece.get_color() == target_piece.get_color():
+            raise NonCaptureOwnPieceError("No puedes capturar tus propias piezas")
+
+        if not self._ruta_despejada(from_row, from_col, to_row, to_col):
+            raise NonPassOverPieceError("No puedes saltar sobre otras piezas")
+
+        if isinstance(piece, Pawn):
+            if not self._es_movimiento_valido_peon(from_row, from_col, to_row, to_col, target_piece):
+                raise NonCaptureForwardError("Un peón no puede capturar hacia adelante")
+
+        self._make_move(from_row, from_col, to_row, to_col)
+        self._validate_end_game()
+
+    def _ruta_despejada(self, from_row, from_col, to_row, to_col):
+        if isinstance(self.__positions__[from_row][from_col], Knight):
+            return True  
+
+        fila_paso = 1 if to_row > from_row else -1 if to_row < from_row else 0
+        columna_paso = 1 if to_col > from_col else -1 if to_col < from_col else 0
+
+        fila_actual, columna_actual = from_row + fila_paso, from_col + columna_paso
+        while fila_actual != to_row or columna_actual != to_col:
+            if self.__positions__[fila_actual][columna_actual]:
+                return False
+            fila_actual += fila_paso
+            columna_actual += columna_paso
+        return True
+    
+    def _es_movimiento_valido_peon(self, from_row, from_col, to_row, to_col, target_piece):
+        direccion = 1 if self.__positions__[from_row][from_col].get_color() == 'BLACK' else -1
+        return not (to_row == from_row + direccion and target_piece is not None and from_col == to_col)
+
+    def _make_move(self, from_row, from_col, to_row, to_col):
+        self.__positions__[to_row][to_col] = self.__positions__[from_row][from_col]
+        self.__positions__[from_row][from_col] = None
+
+
+    def _validate_end_game(self):
+        piezas_blancas, piezas_negras = 0, 0
+        for fila in self.__positions__:
+            for pieza in fila:
+                if pieza:
+                    if pieza.get_color() == 'WHITE':
+                        piezas_blancas += 1
+                    elif pieza.get_color() == 'BLACK':
+                        piezas_negras += 1
+
+        if piezas_negras == 0:
+            raise GameOverException("White wins")
+        elif piezas_blancas == 0:
+            raise GameOverException("Black wins")
