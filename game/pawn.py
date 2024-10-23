@@ -3,7 +3,7 @@ from game.pieces import Piece
 class Pawn(Piece):
     def __str__(self):
 
-        return '♟' if self.__color__ == 'WHITE' else '♙'
+        return '♙' if self.__color__ == 'WHITE' else '♟'
     
     def possible_moves(self, row, col):
         moves = []
