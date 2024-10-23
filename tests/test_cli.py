@@ -7,30 +7,30 @@ from game.exceptions import InvalidPieceMoveError
 
 class TestCli(unittest.TestCase):
 
-    # @patch('sys.stdout', new_callable=StringIO)
-    # def test_show_board_with_icons(self, mock_stdout):
-    #     board = [
-    #         ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
-    #         ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
-    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
-    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
-    #         ['.', '.', '.', '.', '.', '.', '.', '.'],
-    #         ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-    #         ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
-    #     ]
-    #     show_board_with_icons(board)
-    #     expected_output = (
-    #         '♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n'
-    #         '♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟\n'
-    #         '· · · · · · · ·\n'
-    #         '· · · · · · · ·\n'
-    #         '· · · · · · · ·\n'
-    #         '· · · · · · · ·\n'
-    #         '♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙\n'
-    #         '♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖\n'
-    #     )
-    #     self.assertEqual(mock_stdout.getvalue(), expected_output)
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_show_board_with_icons(self, mock_stdout):
+        board = [
+            ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
+            ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+            ['.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.'],
+            ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+            ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
+        ]
+        show_board_with_icons(board)
+        expected_output = (
+            '♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜\n'
+            '♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟\n'
+            '· · · · · · · ·\n'
+            '· · · · · · · ·\n'
+            '· · · · · · · ·\n'
+            '· · · · · · · ·\n'
+            '♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙\n'
+            '♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖\n'
+        )
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['EXIT'])
