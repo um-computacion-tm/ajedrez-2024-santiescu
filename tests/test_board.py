@@ -14,7 +14,7 @@ class TestTablero(unittest.TestCase):
         tablero.board[6][0] = 'P'
         with self.assertRaises(NonCaptureOwnPieceError) as contexto:
             tablero.move_piece(7, 0, 6, 0)
-        self.assertEqual(str(contexto.exception), "You cannot capture your own pieces.")
+        self.assertEqual(str(contexto.exception), "No puedes capturar tus propias piezas.")
 
     def test_pieza_pasa_sobre_otras(self):
         tablero = Board()
@@ -23,7 +23,7 @@ class TestTablero(unittest.TestCase):
         tablero.__positions__[0][1] = 'P'
         with self.assertRaises(NonPassOverPieceError) as contexto:
             tablero.move_piece(0, 0, 0, 2)
-        self.assertEqual(str(contexto.exception), "You cannot pass over other pieces.")
+        self.assertEqual(str(contexto.exception), "No puedes pasar por encima de tus propias piezas.")
 
     def test_partida_finalizada_gana_blancas(self):
         tablero = Board()

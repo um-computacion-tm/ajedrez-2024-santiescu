@@ -1,7 +1,7 @@
 import unittest
 from io import StringIO
 from game.chess import Chess
-from game.cli import run_game as play, render_board_with_icons as show_board_with_icons
+from game.cli import play as play, render_board_with_icons as show_board_with_icons
 from unittest.mock import patch, MagicMock, Mock
 from game.exceptions import InvalidPieceMoveError
 
@@ -64,7 +64,7 @@ class TestCli(unittest.TestCase):
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
         chess.turno = 'WHITE'
         play(chess)
-        chess.realizar_movimiento.assert_called_with(6, 0, 4, 0)
+        chess.move.assert_called_with(6, 0, 4, 0)
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['7', '1', '5', '0'])

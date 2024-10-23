@@ -5,8 +5,8 @@ class TestCaballero(unittest.TestCase):
     def test_convertir_a_str(self):
         caballero_blanco = Knight('WHITE')
         caballero_negro = Knight('BLACK')
-        self.assertEqual(str(caballero_blanco), 'N')
-        self.assertEqual(str(caballero_negro), 'n')
+        self.assertEqual(str(caballero_blanco), '♘')
+        self.assertEqual(str(caballero_negro), '♞')
         
     def test_generar_direcciones_caballero(self):
         caballero = Knight('WHITE')
