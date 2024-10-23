@@ -7,8 +7,8 @@ class VerificarPeon(unittest.TestCase):
     def test_metodo_str(self):
         peon_blanco = Pawn('WHITE')
         peon_negro = Pawn('BLACK')
-        self.assertEqual(str(peon_blanco), 'P')
-        self.assertEqual(str(peon_negro), 'p')
+        self.assertEqual(str(peon_blanco), '♙')
+        self.assertEqual(str(peon_negro), '♟')
 
 # Evalúa los posibles movimientos del peón blanco desde varias posiciones. Llama al método possible_moves con diferentes posiciones iniciales y compara los movimientos obtenidos
     def test_movimientos_peon_blanco(self):

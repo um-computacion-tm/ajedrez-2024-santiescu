@@ -34,7 +34,7 @@ def play(chess):
 
         origen_fila, origen_columna, destino_fila, destino_columna = map(int, [origen_fila, origen_columna, destino_fila, destino_columna])
 
-        chess.realizar_movimiento(origen_fila, origen_columna, destino_fila, destino_columna)
+        chess.move(origen_fila, origen_columna, destino_fila, destino_columna)
 
         print("DEBUG: Movement completed, checking for next input.")
         

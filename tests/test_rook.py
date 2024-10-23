@@ -92,8 +92,8 @@ class PruebaTorre(unittest.TestCase):
     def test_metodo_str(self):
         torre_blanca = Rook('WHITE')
         torre_negra = Rook('BLACK')
-        self.assertEqual(str(torre_blanca), 'R')
-        self.assertEqual(str(torre_negra), 'r')
+        self.assertEqual(str(torre_blanca), '♖')
+        self.assertEqual(str(torre_negra), '♜')
         
 # Comprueba que el método possible_moves de una torre blanca, ubicada en el centro del tablero, devuelva los movimientos correctos.
 

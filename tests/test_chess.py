@@ -27,13 +27,13 @@ class TestAjedrez(unittest.TestCase):
         partida = Chess()  
         with self.assertRaises(NonPieceOriginError) as contexto:
             partida.move(3, 3, 4, 3)  
-        self.assertEqual(str(contexto.exception), "There is no piece at the origin position.")
+        self.assertEqual(str(contexto.exception), "No hay ninguna pieza en la posición de origen.")
 
     def test_realizar_movimientor_sin_pieza2(self):
         partida = Chess()  
         with self.assertRaises(NonPieceOriginError) as contexto:
             partida.move(3, 4, 4, 4)  
-        self.assertEqual(str(contexto.exception), "There is no piece at the origin position.")
+        self.assertEqual(str(contexto.exception), "No hay ninguna pieza en la posición de origen.")
 
 
     def test_turno_incorrecto(self):
@@ -41,13 +41,13 @@ class TestAjedrez(unittest.TestCase):
         partida.move(6, 0, 4, 0)
         with self.assertRaises(WrongTurnError) as contexto:
             partida.move(6, 1, 5, 2)
-        self.assertEqual(str(contexto.exception), "It is not the turn of the selected piece.")
+        self.assertEqual(str(contexto.exception), "No es el turno de la pieza seleccionada.")
 
     def test_movimiento_invalido(self):
         partida = Chess()
         with self.assertRaises(InvalidPieceMoveError) as contexto:
             partida.move(6, 0, 3, 0)
-        self.assertEqual(str(contexto.exception), "Invalid move for the selected piece.")
+        self.assertEqual(str(contexto.exception), "Movimiento no válido para la pieza seleccionada.")
 
     def test_alternar_turno(self):
         partida = Chess()

@@ -43,10 +43,10 @@ class Board:
             self.__positions__[1][i] = Pawn("BLACK")
             self.__positions__[6][i] = Pawn("WHITE")
 
-        self.__positions__[0][0] = Rook("BLACK", self)
-        self.__positions__[0][7] = Rook("BLACK", self)
-        self.__positions__[7][7] = Rook("WHITE", self)
-        self.__positions__[7][0] = Rook("WHITE", self)
+        self.__positions__[0][0] = Rook("BLACK")
+        self.__positions__[0][7] = Rook("BLACK")
+        self.__positions__[7][7] = Rook("WHITE")
+        self.__positions__[7][0] = Rook("WHITE")
 
         self.__positions__[0][1] = Knight("BLACK")
         self.__positions__[0][6] = Knight("BLACK")

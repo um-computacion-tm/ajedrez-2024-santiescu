@@ -28,15 +28,15 @@ class VerificarReina(unittest.TestCase):
     def test_representacion_str(self):
         reina_blanca = Queen('WHITE')
         reina_negra = Queen('BLACK')
-        self.assertEqual(str(reina_blanca), 'Q')
-        self.assertEqual(str(reina_negra), 'q')
+        self.assertEqual(str(reina_blanca), '♕')
+        self.assertEqual(str(reina_negra), '♛')
 
     # Test explícito del método __str__
     def test_queen_str_direct(self):
         reina = Queen('WHITE')
-        self.assertEqual(reina.__str__(), 'Q')
+        self.assertEqual(reina.__str__(), '♕')
         reina_negra = Queen('BLACK')
-        self.assertEqual(reina_negra.__str__(), 'q')
+        self.assertEqual(reina_negra.__str__(), '♛')
 
     # Test para verificar que se puede invocar possible_moves
     def test_invocar_possible_moves(self):
