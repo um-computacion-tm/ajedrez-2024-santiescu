@@ -1,9 +1,9 @@
 from game.pieces import Piece
 class Knight(Piece):
-    def __init__(self, color, board):
-        super().__init__(color, board)
-        self.white_str = "♘"  # Símbolo para el caballo blanco
-        self.black_str = "♞"  # Símbolo para el caballo negro
+    # def __init__(self, color, board):
+    #     super().__init__(color, board)
+    #     self.white_str = "♘"  # Símbolo para el caballo blanco
+    #     self.black_str = "♞"  # Símbolo para el caballo negro
 
     def __str__(self):
         return '♘' if self.__color__ == 'WHITE' else '♞'
