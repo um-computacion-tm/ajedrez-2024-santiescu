@@ -58,7 +58,7 @@ class TestCli(unittest.TestCase):
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['6', '0', '4', '0'])
-    @patch('chess.cli.render_board_with_icons')
+    @patch('game.cli.render_board_with_icons')
     def test_valid_move_pawn(self, mock_render_board, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
@@ -68,7 +68,7 @@ class TestCli(unittest.TestCase):
 
     @patch('sys.stdout', new_callable=StringIO)
     @patch('builtins.input', side_effect=['7', '1', '5', '0'])
-    @patch('chess.cli.render_board_with_icons')
+    @patch('game.cli.render_board_with_icons')
     def test_valid_move_knight1(self, mock_render_board, mock_input, mock_stdout):
         chess = MagicMock()
         chess.get_board.return_value = [['.'] * 8 for _ in range(8)]
