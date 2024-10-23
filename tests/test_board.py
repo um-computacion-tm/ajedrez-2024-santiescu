@@ -1,9 +1,9 @@
 import unittest
-from board import Board
-from pieces import Pawn
-from rook import Rook
-from exceptions import OutOfBoard, RowOutOfBoard, ColumnOutOfBoard
-from bishop import Bishop
+from game.board import Board
+from game.pawn import Pawn
+from game.rook import Rook
+from game.exceptions import OutOfBoard, RowOutOfBoard, ColumnOutOfBoard
+from game.bishop import Bishop
 class TestBoard(unittest.TestCase):
 
     # STR
